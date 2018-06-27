@@ -10,13 +10,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TestCase1 {
 
-	WebDriver driver;
+	static 	WebDriver driver;
 	
 	public WebDriver openBrowser(String browserName){
 		
 		if(browserName.equalsIgnoreCase("chrome")){
-			String path = System.getProperty("user.dir");
-			System.setProperty("webdriver.chrome.driver", path+"\\chromedriver_win32\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "D:\\AutomationWorkSpace\\Driver\\chromedriver_win32\\chromedriver.exe");
 			driver = new ChromeDriver();
 		}
 		else if(browserName.equalsIgnoreCase("chrome"))
@@ -27,26 +26,27 @@ public class TestCase1 {
 		return driver;
 	}
 	
-	public void gotoSignInPage(WebDriver driver){
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		
+		//String path = System.getProperty();
+		
+		driver = new ChromeDriver();
+		
+		driver.get("http://automationpractice.com/index.php");
+		
+		driver.manage().window().maximize();
+		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		//driver.findElement(By.name("q")).sendKeys("Test");
+		
+		//TC01_Verify Wrong password
 		WebElement e = driver.findElement(By.linkText("Sign in"));
 		
 		e.click();
 		
-	}
-	
-	public void gotoHomePage(WebDriver driver){
-		
-		driver.findElement(By.xpath("//img[@alt='My Store']")).click();
-		
-	}
-	
-	
-	public void tc1_VeriyWrongPassword(WebDriver driver){
-		
-		gotoSignInPage(driver);
-		
-		System.out.println("test");
 		WebElement email = driver.findElement(By.xpath("//input[@id='email']"));
 		email.sendKeys("engg.ashish007@yahoo.com");
 		
@@ -64,14 +64,9 @@ public class TestCase1 {
 		else
 			System.out.println("Login Successful");
 		
-		gotoHomePage(driver);
+		//Verify Forgot Password
 		
-	}
-	
-	public void tc2_VerifyForgotPassword_label(WebDriver driver){
-		
-		gotoSignInPage(driver);
-		
+		//TC02_Validate Label
 		WebElement FP_link = driver.findElement(By.linkText("Forgot your password?"));
 		FP_link.click();
 		
@@ -83,17 +78,7 @@ public class TestCase1 {
 		else
 			System.out.println("Label name is wrong");
 		
-		gotoHomePage(driver);
-		
-	}
-	
-	public void tc3_VerifyForgotPassword_emailField(WebDriver driver){
-		
-		gotoSignInPage(driver);
-		
-		WebElement FP_link = driver.findElement(By.linkText("Forgot your password?"));
-		FP_link.click();
-		
+		//TC03_Validate Email field
 		WebElement FP_textBox = driver.findElement(By.xpath("//div[@class='form-group']/input"));
 		String FP_textBox_type = FP_textBox.getAttribute("type");
 		
@@ -102,31 +87,13 @@ public class TestCase1 {
 		else
 			System.out.println("Email address Text field is missing");
 		
-		gotoHomePage(driver);
-		
-	}
-	
-	public void tc4_VerifyForgotPassword_submitButton(WebDriver driver){
-		
-		gotoSignInPage(driver);
-		
-		WebElement FP_link = driver.findElement(By.linkText("Forgot your password?"));
-		FP_link.click();
-		
+		//TC04_Validate submit button
 		WebElement FP_submitButton = driver.findElement(By.xpath("//button[@class='btn btn-default button button-medium']/span"));
 		String FP_submitButton_text = FP_submitButton.getText();
 		
-		System.out.println(FP_submitButton_text);
+		System.out.println(FP_submitButton_text+"test");
 		
-		gotoHomePage(driver);
-		
-	}
-	
-	
-	public void tc5_VerifyWebsiteSearch(WebDriver driver){
-		
-		gotoSignInPage(driver);
-		
+		//TC05_Validate search
 		WebElement searchText = driver.findElement(By.id("search_query_top"));
 		searchText.sendKeys("test");
 		
@@ -141,36 +108,6 @@ public class TestCase1 {
 		else
 			System.out.println("Error not contains search text i.e. test");
 		
-		gotoHomePage(driver);
-		
-	}
-	
-
-	public static void main(String[] args) {
-		
-		TestCase1 obj = new TestCase1();
-		
-		WebDriver driver = obj.openBrowser("chrome");		
-		
-		driver.get("http://automationpractice.com/index.php");
-		
-		driver.manage().window().maximize();
-		
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		//Verify wrong Password
-		obj.tc1_VeriyWrongPassword(driver);
-		
-		obj.tc2_VerifyForgotPassword_label(driver);
-		
-		obj.tc3_VerifyForgotPassword_emailField(driver);
-		
-		obj.tc4_VerifyForgotPassword_submitButton(driver);
-		
-		obj.tc5_VerifyWebsiteSearch(driver);
-		
 		driver.quit();
-		
 	}
-		
 }
