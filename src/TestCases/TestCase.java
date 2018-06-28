@@ -19,7 +19,7 @@ public class TestCase{
 		
 	}
 	
-	public void tearDown(){
+	public void tearDown(WebDriver driver){
 		driver.quit();
 	}
 	
@@ -166,7 +166,7 @@ public class TestCase{
 		
 		obj.tc5_VerifyWebsiteSearch(driver);
 		
-		obj.tearDown();
+		obj.tearDown(driver);
 		
 	}
 		

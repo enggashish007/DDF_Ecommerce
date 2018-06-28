@@ -16,7 +16,7 @@ public class Configuration {
 			System.setProperty("webdriver.chrome.driver", path+"\\chromedriver_win32\\chromedriver.exe");
 			driver = new ChromeDriver();
 		}
-		else if(browserName.equalsIgnoreCase("chrome"))
+		else if(browserName.equalsIgnoreCase("firefox"))
 		{
 			System.setProperty("webdriver.gecko.driver", path+"geckodriver-v0.21.0-win32\\geckodriver.exe");
 			driver = new FirefoxDriver();
